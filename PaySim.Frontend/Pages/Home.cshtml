@@ -1,0 +1,103 @@
+﻿@page
+@model PaySim.Frontend.Pages.HomeModel
+@{
+	ViewData["Title"] = "Home";
+}
+
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMoney">
+    Add Money to Wallet
+</button>
+&nbsp;
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payment">
+    Do Payment
+</button>
+ <h2>Wallet Balance: ₹@Model.WalletBalance</h2>
+<h3 align="center">@Model.Message</h3>
+<h2>Transaction History</h2>
+ <table class="table table-striped" border="1"> 
+ 	<thead> 
+ 		<tr class="table-primary"> 
+ 			<th>Transaction ID</th> 
+ 			<th>Amount</th> 
+ 			<th>Payment Method</th> 
+ 			<th>Payment Credentials</th> 
+ 			<th>Transaction Status</th> 
+ 			<th>Timestamp</th> 
+ 			<th>Wallet Balance After Transaction</th> 
+ 			<th>Action</th> 
+ 		</tr> 
+ 	</thead> 
+ 	<tbody> 
+ 		@foreach(var t in Model.Transactions) 
+ 		{ 
+ 			<tr> 
+ 				<td>@t.TransactionId</td> 
+ 				<td>@t.Amount</td> 
+ 				<td>@t.PaymentMethod</td> 
+ 				<td>@t.PaymentCredentials</td> 
+ 				<td>@t.Status</td> 
+ 				<td>@t.Timestamp</td> 
+ 				<td>₹@t.WalletBalanceAfterTransaction</td> 
+ 				<td> 
+ 					@if(t.Status == PaySlip.Domain.Constants.TransactionStatus.Success) 
+ 					{ 
+ 						<form method="post" asp-page-handler="Cancel" asp-route-id="@t.TransactionId">
+                            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                        </form> 
+ 					}
+ 				</td> 
+ 			</tr> 
+ 		} 
+ 	</tbody> 
+ </table>
+<div class="modal fade" id="payment">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="label">Proceed to Pay</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-page-handler="ProceedToPay">
+                <div class="modal-body">
+                    <label class="form-label">Amount: </label>
+                    <input class="form-control" type="number" asp-for="Amount" step="0.01" required />
+                    <label class="form-label">Payment Method: </label>
+                    <select class="form-select" asp-for="PaymentMethod">
+                        <option value="" selected disabled>Card</option>
+                        <option value="0">Card</option>
+                        <option value="1">UPI</option>
+                        <option value="2">Bank Transfer</option>
+                    </select>
+                    <label class="form-label">Payment Credentials of person who you sending money to</label>
+                    <input class="form-control" type="text" name="PaymentCredential" placeholder="Enter Credentials" required />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Pay</button>
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addMoney">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="label">Add Money to Wallet</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-page-handler="AddToWallet">
+                <div class="modal-body">
+                    <label class="form-label">Amount: </label>
+                    <input class="form-control" type="number" asp-for="AddAmt" step="0.01" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

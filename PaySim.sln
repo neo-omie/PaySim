@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySim.API", "PaySim.API\PaySim.API.csproj", "{1427410C-CD91-4666-8216-BDCFE6B631E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySlip.Application", "PaySlip.Application\PaySlip.Application.csproj", "{BFB5E46D-F6CB-4B87-8AA1-2AA670515ABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySlip.Domain", "PaySlip.Domain\PaySlip.Domain.csproj", "{DEC160BE-5B23-4409-A47D-EC55239DE307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySlip.Persistence", "PaySlip.Persistence\PaySlip.Persistence.csproj", "{4864B616-8CFD-41A2-8228-74EDFDE669B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaySim.Frontend", "PaySim.Frontend\PaySim.Frontend.csproj", "{5186D6D5-816B-491D-A1A1-8C0A978667F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1427410C-CD91-4666-8216-BDCFE6B631E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1427410C-CD91-4666-8216-BDCFE6B631E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1427410C-CD91-4666-8216-BDCFE6B631E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1427410C-CD91-4666-8216-BDCFE6B631E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB5E46D-F6CB-4B87-8AA1-2AA670515ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFB5E46D-F6CB-4B87-8AA1-2AA670515ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFB5E46D-F6CB-4B87-8AA1-2AA670515ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFB5E46D-F6CB-4B87-8AA1-2AA670515ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC160BE-5B23-4409-A47D-EC55239DE307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC160BE-5B23-4409-A47D-EC55239DE307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC160BE-5B23-4409-A47D-EC55239DE307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC160BE-5B23-4409-A47D-EC55239DE307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4864B616-8CFD-41A2-8228-74EDFDE669B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4864B616-8CFD-41A2-8228-74EDFDE669B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4864B616-8CFD-41A2-8228-74EDFDE669B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4864B616-8CFD-41A2-8228-74EDFDE669B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5186D6D5-816B-491D-A1A1-8C0A978667F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5186D6D5-816B-491D-A1A1-8C0A978667F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5186D6D5-816B-491D-A1A1-8C0A978667F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5186D6D5-816B-491D-A1A1-8C0A978667F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
