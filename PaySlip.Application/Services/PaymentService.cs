@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using PaySlip.Application.Contracts.Application;
 using PaySlip.Application.Contracts.Persistence;
@@ -20,7 +21,22 @@ namespace PaySlip.Application.Services
 
         public async Task<Transaction> CreateDeposit(decimal amount, PaymentMethod paymentMethod)
         {
-            return await _paymentRepository.CreateDepositAsync(amount, paymentMethod);
+
+            var transaction = await _paymentRepository.CreateDepositAsync(amount, paymentMethod);
+
+            await Task.Run(async () =>
+            {
+                await Task.Delay(5000);
+                var callbackUrl = $"https://localhost:7212/api/pay/PaymentCallback/{transaction.TransactionId}";
+
+                using var client = new HttpClient();
+                var payload = new { Status = "Success" };
+                var json = JsonSerializer.Serialize(payload);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PostAsync(callbackUrl, content);
+            });
+
+            return transaction;
         }
 
         public async Task<Transaction> ProcessPayment(Guid transactionId, string paymentCredentials)
@@ -30,7 +46,21 @@ namespace PaySlip.Application.Services
 
         public async Task<Transaction> CancelTransaction(Guid transactionId)
         {
-            return await _paymentRepository.CancelTransactionAsync(transactionId);
+            var cancellingTransaction = await _paymentRepository.CancelTransactionAsync(transactionId);
+
+            // Simulate bank processing and callback after 5 seconds
+            await Task.Run(async () =>
+            {
+                await Task.Delay(5000);
+                var callbackUrl = $"https://localhost:7212/api/pay/PaymentCallback/{cancellingTransaction.TransactionId}";
+
+                using var client = new HttpClient();
+                var payload = new { Status = "Success" };
+                var json = JsonSerializer.Serialize(payload);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PostAsync(callbackUrl, content);
+            });
+            return cancellingTransaction;
         }
 
         public async Task<IEnumerable<Transaction>> GetTransactionHistory()
@@ -46,6 +76,11 @@ namespace PaySlip.Application.Services
         public async Task<decimal> AddWalletBalance(decimal amount)
         {
             return await _paymentRepository.AddWalletBalanceAsync(amount);
+        }
+
+        public async Task<bool> UpdateTransactionStatus(Guid transactionId, string statusUpdate)
+        {
+            return await _paymentRepository.UpdateTransactionStatus(transactionId, statusUpdate);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PaySlip.Application.Contracts.Application;
+using PaySlip.Application.DTOs;
 using PaySlip.Domain.Constants;
 using PaySlip.Domain.Models;
 
@@ -54,5 +55,22 @@ namespace PaySim.API.Controllers
             var addBalance = await _paymentService.AddWalletBalance(amount);
             return Ok(addBalance);
         }
+
+        // This API is for bank payment processing simulation
+        [HttpPost("PaymentCallback/{transactionId}")]
+        public async Task<ActionResult> PaymentCallback(Guid transactionId, [FromBody] PaymentStatusUpdate statusUpdate)
+        {
+            var result = await _paymentService.UpdateTransactionStatus(transactionId, statusUpdate.Status);
+
+            if (result)
+            {
+                return Ok(new { message = "Transaction updated successfully", thumbsUp = "👍" });
+            }
+            else
+            {
+                return BadRequest(new { message = "Transaction not found or update failed" });
+            }
+        }
+
     }
 }

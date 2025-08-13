@@ -7,6 +7,8 @@ namespace PaySim.Frontend.Pages
 {
     public class HomeModel : PageModel
     {
+        public bool IsLoading { get; set; } = false;
+
         private readonly HttpClient _httpClient;
         public HomeModel(IHttpClientFactory httpClientFactory)
         {

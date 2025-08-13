@@ -14,6 +14,7 @@ namespace PaySlip.Application.Contracts.Persistence
         Task<Transaction> ProcessPaymentAsync(Guid transactionId, string paymentCredentials);
         Task<Transaction> CancelTransactionAsync(Guid transactionId);
         Task<decimal> AddWalletBalanceAsync(decimal amount);
+        Task<bool> UpdateTransactionStatus(Guid transactionId, string statusUpdate);
 
         Task<IEnumerable<Transaction>> GetTransactionHistoryAsync();
         decimal GetWalletBalance();

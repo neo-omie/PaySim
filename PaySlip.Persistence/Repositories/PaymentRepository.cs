@@ -102,5 +102,21 @@ namespace PaySlip.Persistence.Repositories
                 return wallet.Balance;
             throw new Exception($"For some reason, wallet balance has not been added.");
         }
+
+        public async Task<bool> UpdateTransactionStatus(Guid transactionId, string statusUpdate)
+        {
+            var checkTransaction = await _context.Transactions.FirstOrDefaultAsync(t => t.TransactionId == transactionId);
+            if (checkTransaction == null)
+            {
+                throw new Exception($"Transaction with ID {transactionId} not found to update status.");
+            }
+            if(checkTransaction.Status != TransactionStatus.Pending)
+            {
+                throw new Exception($"Transaction with ID {transactionId} is not pending. Can't process");
+            }
+            if (checkTransaction.Status == TransactionStatus.Pending || checkTransaction.Status == TransactionStatus.Success)
+                return true;
+            return false;
+        }
     }
 }

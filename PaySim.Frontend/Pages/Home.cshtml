@@ -3,11 +3,13 @@
 @{
 	ViewData["Title"] = "Home";
 }
+<div id="overlay"></div>
+<partial name="_Loader" id="loader" class="spinner" />
 
 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMoney">
     Add Money to Wallet
 </button>
-&nbsp;
+    <span>&nbsp;</span>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payment">
     Do Payment
 </button>
@@ -41,8 +43,8 @@
  				<td> 
  					@if(t.Status == PaySlip.Domain.Constants.TransactionStatus.Success) 
  					{ 
- 						<form method="post" asp-page-handler="Cancel" asp-route-id="@t.TransactionId">
-                            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-xmark"></i> Cancel</button>
+ 						<form class="show-loader" method="post" asp-page-handler="Cancel" asp-route-id="@t.TransactionId">
+                            <button class="btn btn-danger" type="submit" onclick="showLoader()"><i class="fa-solid fa-xmark"></i> Cancel</button>
                         </form> 
  					}
  				</td> 
@@ -73,7 +75,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Pay</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="showLoader()">Pay</button>
                     <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
                 </div>
             </form>
@@ -101,3 +103,5 @@
         </div>
     </div>
 </div>
+
+@* <button id="loadButton" onclick="showLoader()">Click Me</button> *@
