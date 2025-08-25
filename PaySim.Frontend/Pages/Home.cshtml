@@ -6,14 +6,18 @@
 <div id="overlay"></div>
 <partial name="_Loader" id="loader" class="spinner" />
 
-<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMoney">
-    Add Money to Wallet
-</button>
-    <span>&nbsp;</span>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payment">
-    Do Payment
-</button>
- <h2>Wallet Balance: ₹@Model.WalletBalance</h2>
+<div class="heady">
+    <div class="action-buttons">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMoney">
+            Add Money to Wallet
+        </button>
+            <span>&nbsp;</span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payment">
+            Do Payment
+        </button>
+    </div>
+    <h3>Wallet Balance: <button class="btn btn-success" disabled>₹@Model.WalletBalance</button></h3>
+</div>
 <h3 align="center">@Model.Message</h3>
 <h2>Transaction History</h2>
  <table class="table table-striped" border="1"> 

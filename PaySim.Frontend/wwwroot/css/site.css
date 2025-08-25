@@ -134,6 +134,11 @@ body {
         font-weight: bold;
     }
 
+    .heady {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
 @keyframes writeline {
     0% {
